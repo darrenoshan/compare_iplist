@@ -113,52 +113,32 @@ def main():
     ip_addresses1, errors1 = get_ip_addresses_from_file(file_path1, reference=True)
     ip_addresses2, errors2 = get_ip_addresses_from_file(file_path2)
 
-    report_folder_name = datetime.now().strftime("%Y%m%d_%H%M%S")
+    report_folder_name = "report/"+datetime.now().strftime("%Y%m%d_%H%M%S")
     os.makedirs(report_folder_name)
 
-    logging.info(f"Extracting IP Addresses from {file_path1}")
     for ip in ip_addresses1:
         pass
 
-    logging.info(f"Extracting IP Addresses from {file_path2}")
     for ip in ip_addresses2:
         pass
 
-    logging.info(f"Saving difference to file")
     difference_file_path = save_difference_to_file(file_path1, file_path2, ip_addresses1, ip_addresses2, report_folder_name)
-
-    logging.info(f"Saving error messages to file")
     error_file_path = save_error_to_file(errors1 + errors2, report_folder_name)
-
     unique_to_reference = ip_addresses1 - ip_addresses2
-    
-    logging.info(f"Saving IPs unique to reference to file")
     unique_file_path = save_unique_to_reference(report_folder_name, unique_to_reference)
-
-    logging.info(f"Saving overall reports to file")
     overall_report_file_path = save_overall_reports(report_folder_name, file_path1, file_path2, ip_addresses1, ip_addresses2, errors1 + errors2)
-
-    logging.info(f"Saving IPs unique to {file_path1} to file")
     unique_to_first_file_path = save_ips_unique_to_first(report_folder_name, ip_addresses1, ip_addresses2)
-
-    logging.info(f"Saving IPs unique to {file_path2} to file")
     unique_to_second_file_path = save_ips_unique_to_second(report_folder_name, ip_addresses1, ip_addresses2)
 
-    logging.info(f"\nReport files saved in folder '{report_folder_name}':")
-    logging.info(f"- IPs unique to reference: {unique_file_path}")
-    logging.info(f"- Missing IPs in {file_path2}: {difference_file_path}")
-    logging.info(f"- Extraction errors: {error_file_path}")
-    logging.info(f"- Overall Reports: {overall_report_file_path}")
-    logging.info(f"- IPs unique to {file_path1}: {unique_to_first_file_path}")
-    logging.info(f"- IPs unique to {file_path2}: {unique_to_second_file_path}")
-
-    logging.info("\nProcessing completed. Report:")
-    logging.info(f"Total IP addresses in {file_path1}: {len(ip_addresses1)}")
-    logging.info(f"Total IP addresses in {file_path2}: {len(ip_addresses2)}")
-    logging.info(f"Number of unique IP addresses in {file_path1}: {len(ip_addresses1)}")
-    logging.info(f"Number of unique IP addresses in {file_path2}: {len(ip_addresses2)}")
-    logging.info(f"Number of IP addresses unique to {file_path1}: {len(ip_addresses1 - ip_addresses2)}")
-    logging.info(f"Number of IP addresses unique to {file_path2}: {len(ip_addresses2 - ip_addresses1)}")
+    logging.info("-"*30)
+    logging.info(f"Processing completed.")
+    logging.info("-"*30)
+    logging.info(f"Number of unique IP addresses in : {len(ip_addresses1)}")
+    logging.info(f"Number of unique IP addresses in : {len(ip_addresses2)}")
+    logging.info("-"*30)
+    logging.info(f"Number of IP addresses unique to : {len(ip_addresses1 - ip_addresses2)} <<<<<< THIS IS THE PROBLEM")
+    logging.info(f"Number of IP addresses unique to : {len(ip_addresses2 - ip_addresses1)}")
+    logging.info("-"*30)
 
 if __name__ == "__main__":
     main()

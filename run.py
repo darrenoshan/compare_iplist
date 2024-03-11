@@ -69,7 +69,7 @@ class FileComparerGUI:
             return
 
         # Call your main script with file paths
-        command = ["/usr/bin/python3", "cmd.py", self.reference_file_path, self.file2_path]
+        command = ["/usr/bin/python3", "console.py", self.reference_file_path, self.file2_path]
         try:
             result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
             self.update_output(result.stdout + result.stderr)
@@ -80,6 +80,14 @@ class FileComparerGUI:
         # Clear previous content and update the Text widget
         self.output_text.delete(1.0, tk.END)
         self.output_text.insert(tk.END, text)
+
+
+    def set_rtl_direction(self):
+        # Create a tag configuration for right-to-left (RTL) text
+        self.output_text.tag_configure("rtl", justify="right")
+
+        # Apply the "rtl" tag to the existing text
+        self.output_text.tag_add("rtl", 1.0, tk.END)
 
 if __name__ == "__main__":
     root = tk.Tk()
