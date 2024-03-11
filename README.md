@@ -47,7 +47,7 @@ This Python script easily compares two lists of IP addresses from two files, let
 ## Example
 
       ```bash
-        ./main_command.py  01_sample_refrence_ip_list.txt 02_sample_ip_list.txt
+        ./cmd.py  sample_refrence_ip_list.txt sample_ip_list.txt
 
       ```
  Replace `01_sample_refrence_ip_list.txt` and `02_sample_ip_list.txt` with the actual file paths.
