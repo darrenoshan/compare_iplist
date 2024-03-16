@@ -69,7 +69,7 @@ class FileComparerGUI:
             return
 
         # Call your main script with file paths
-        command = ["/usr/bin/python3", "console.py", self.reference_file_path, self.file2_path]
+        command = ["python", "console.py", self.reference_file_path, self.file2_path]
         try:
             result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
             self.update_output(result.stdout + result.stderr)
